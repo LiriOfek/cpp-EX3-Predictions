@@ -11,6 +11,9 @@ Purpose: This file pass vector of numbers into predicates and print
 #include <functional>
 
 const char* COMMA = ", ";
+const char* PRINT_INIITIAL_VECTOR = "Initial vector:";
+const char* PRINT_VECTOR_AFTER_FILTERS = "vector afer filters:";
+const int SUCCESS = 0;
 
 std::vector<int> filterlnts(std::vector<int> numbers,
 	std::function<bool(int)> Predicate) {
@@ -50,7 +53,7 @@ void print_vector(std::vector<int> numbers_vector) {
 }
 
 void print_filter_predicates(std::vector<std::function<bool(int)>> Predicates,
-	std::vector<int> numbers) {
+											std::vector<int> numbers) {
 	/**
 	* @brief  pass the given vector with the predicates, and print the
 	*		  vector after that pass through the filter
@@ -62,7 +65,7 @@ void print_filter_predicates(std::vector<std::function<bool(int)>> Predicates,
 
 	/*lambda function*/
 	auto pass_predicate_into_filter = [](std::function<bool(int)> Predicate,
-		std::vector<int> numbers)
+											std::vector<int> numbers)
 	{return filterlnts(numbers, Predicate); };
 	std::vector<int> numbers_after_filter;
 
@@ -70,4 +73,30 @@ void print_filter_predicates(std::vector<std::function<bool(int)>> Predicates,
 		numbers_after_filter = pass_predicate_into_filter(Predicate, numbers);
 		print_vector(numbers_after_filter);
 	}
+}
+
+int main() {
+	/**
+	* @brief  pass the given vector with the predicates, and print the
+	*		  vector after that pass through the filter
+	* @param  OUT SUCCESS
+	* @return SUCCESS in the end of the function
+	* @author Liri
+	*/
+	std::vector<int> numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+	auto Predicates = std::vector<std::function<bool(int)>>{ &is_even,
+																&is_bigger_than_5,
+																&is_divided_by_3 };
+	/*print the initial vector*/
+	std::cout << PRINT_INIITIAL_VECTOR
+				<< std::endl;
+	print_vector(numbers);
+
+	/*print the vector after passing the predicates*/
+	std::cout << PRINT_VECTOR_AFTER_FILTERS
+				<< std::endl;
+	print_filter_predicates(Predicates,	numbers);
+
+	return SUCCESS;
 }
