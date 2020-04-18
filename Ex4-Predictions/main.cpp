@@ -48,3 +48,26 @@ void print_vector(std::vector<int> numbers_vector) {
 	}
 	std::cout << std::endl;
 }
+
+void print_filter_predicates(std::vector<std::function<bool(int)>> Predicates,
+	std::vector<int> numbers) {
+	/**
+	* @brief  pass the given vector with the predicates, and print the
+	*		  vector after that pass through the filter
+	* @param  std::vector<std::function<bool(int)>> Predicates - the predicates
+	*		  std::vector<int> numbers - the given vector of numbers
+	* @return this function has no return value
+	* @author Liri
+	*/
+
+	/*lambda function*/
+	auto pass_predicate_into_filter = [](std::function<bool(int)> Predicate,
+		std::vector<int> numbers)
+	{return filterlnts(numbers, Predicate); };
+	std::vector<int> numbers_after_filter;
+
+	for (std::function<bool(int)> Predicate : Predicates) {
+		numbers_after_filter = pass_predicate_into_filter(Predicate, numbers);
+		print_vector(numbers_after_filter);
+	}
+}
