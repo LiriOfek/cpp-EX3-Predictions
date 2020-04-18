@@ -10,6 +10,8 @@ Purpose: This file pass vector of numbers into predicates and print
 #include <vector>
 #include <functional>
 
+const char* COMMA = ", ";
+
 std::vector<int> filterlnts(std::vector<int> numbers,
 	std::function<bool(int)> Predicate) {
 	/**
@@ -31,4 +33,18 @@ std::vector<int> filterlnts(std::vector<int> numbers,
 		}
 	}
 	return numbers_after_filter;
+}
+
+void print_vector(std::vector<int> numbers_vector) {
+	/**
+	* @brief  print the numbers that the given vector contain
+	* @param  IN std::vector<int> numbers_vector - the given vector
+	*		  that contain the numbers
+	* @return this function has no return value
+	* @author  Liri
+	*/
+	for (int number : numbers_vector) {
+		std::cout << number << COMMA;
+	}
+	std::cout << std::endl;
 }
